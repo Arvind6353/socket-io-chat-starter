@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	<style type="text/css">
 		body {
@@ -12,18 +13,14 @@
 		}
 		.panel {
 			position: fixed;
-			bottom: 0;
-			left: 0;
+			
+			left: 10;
+			right:10;
 			width: 100%;
 		    padding: 10px;
 		    box-sizing: border-box;
-		    background: #e2e2e2;
+		    
 		}
-		input {
-			font-size: inherit;
-			width: 100%;
-		}
-
 		.inputs {
 			display: flex;
 		}
@@ -43,18 +40,40 @@
 	<div id="messages">
 		<p align="center" id="greeting">Let's Chat ;)</p>
 	</div>
-	<div class="panel">
-		<form onsubmit="sendMessage(this.nickname.value, this.message.value); this.message.value = ''; return false">
-			<div class="inputs">
-				<div class="input-left">
-					<input name="nickname" placeholder="nickname" type="text" autofocus="" autocomplete="off"></input> 
-				</div>
-				<div class="input-right">
-					<input name="message" placeholder="message" type="text" autocomplete="off"></input>
-				</div>
-			</div>
-			<input type="submit" style="display: block" />
-		</form>
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<form class="form-inline" onsubmit="sendMessage(this.nickname.value, this.message.value); this.message.value = ''; return false">
+			
+				<div class="form-group">
+
+		              <input type="text" class="form-control" placeholder="nickname" name="nickname" autofocus="" autocomplete="off"/>
+
+			  </div>
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  <div class="form-group">
+		            <textarea name="message" rows="2" cols="50" placeholder="message" class="form-control "type="text" autocomplete="off"></textarea>
+			  </div>
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+		  		&nbsp;
+			  &nbsp;
+		  	  <button type="submit" class="btn btn-default">Send </button>
+		    
+			</form>
 	</div>
 
 	<script type="text/javascript">
@@ -78,5 +97,7 @@
 			return data;
 		}
 	</script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
 </body>
 </html>
