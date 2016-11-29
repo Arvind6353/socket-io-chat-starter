@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	<style type="text/css">
 		body {
@@ -39,7 +41,7 @@
 </head>
 <body>
 	<div id="messages">
-		<p align="center" id="greeting">Добро пожаловать в чат!</p>
+		<p align="center" id="greeting">Let's Chat ;)</p>
 	</div>
 	<div class="panel">
 		<form onsubmit="sendMessage(this.nickname.value, this.message.value); this.message.value = ''; return false">
@@ -51,7 +53,7 @@
 					<input name="message" placeholder="message" type="text" autocomplete="off"></input>
 				</div>
 			</div>
-			<input type="submit" style="display: none" />
+			<input type="submit" style="display: block" />
 		</form>
 	</div>
 
