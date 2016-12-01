@@ -23,10 +23,10 @@ var port = process.env.PORT || 3000;
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-server.listen(pdrt);
+server.listen(port);
 app.use( require('express').static(__dirname ));
 
-app.get('/', function (req, res) {
+app.get('/', function (req, res) {  
   res.sendfile(__dirname + '/index.html');
 });
 io.on('connection', function(socket){
