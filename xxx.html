@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<style type="text/css">
+		body {
+			margin: 0;
+			font-size: 28px;
+		}
+		.panel {
+			position: fixed;
+			bottom:0;
+			left: 10;
+			right:10;
+			width: 100%;
+		    padding: 10px;
+		    box-sizing: border-box;
+		    
+		}
+		.inputs {
+			display: flex;
+		}
+
+		.input-left {
+			max-width: 20%;
+			padding-right: 0.5em;
+		}
+
+		.input-left, .input-right {
+			flex-grow: 1;
+		}
+	</style>
+	<title>Chat</title>
+</head>
+<body>
+	<div id="messages">
+		<p align="center" id="greeting">Let's Chat ;)</p>
+	</div>
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<form class="form-inline" onsubmit="sendMessage(this.nickname.value, this.message.value); this.message.value = ''; return false">
+			
+				<div class="form-group">
+
+		              <input type="text" class="form-control" placeholder="nickname" name="nickname" autofocus="" autocomplete="off"/>
+
+			  </div>
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  <div class="form-group">
+		            <textarea name="message" rows="2" cols="50" placeholder="message" class="form-control "type="text" autocomplete="off"></textarea>
+			  </div>
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+			  &nbsp;
+		  		&nbsp;
+			  &nbsp;
+		  	  <button type="submit" class="btn btn-default">Send </button>
+		    
+			</form>
+	</div>
+
+	<script type="text/javascript">
+		var socket = io({transports: ['websocket']});
+		var messagesContainer = document.getElementById('messages');
+
+		socket.on('message', function(data) {
+
+			renderMessage(data);
+		})
+
+		function sendMessage(nickname, message) {
+			if(nickname && message)
+				socket.emit('message', renderMessage({nickname: nickname, message: message}));
+		}
+
+		function renderMessage(data) {
+			console.log("hellow in html");
+			var div = document.createElement('DIV');
+			div.innerHTML = '<span><strong>' + data.nickname + ': </strong>' + data.message + '</span>';
+			messagesContainer.insertBefore(div, messagesContainer.firstChild);
+			document.getElementById('greeting').style.display = 'none';
+			return data;
+		}
+	</script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+</body>
+</html>

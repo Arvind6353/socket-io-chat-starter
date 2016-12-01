@@ -3,11 +3,9 @@ var fs = require('fs');
 var socketio = require('socket.io');
 var html = require('escape-html');
 
-var server = http.createServer();
-var io = socketio(server);
 var port = process.env.PORT || 3000;
 
-fs.readFile('./index.html', function (err, html) {
+/*fs.readFile('./sample.html', function (err, html) {
     if (err) {
         throw err; 
     }   
@@ -21,12 +19,23 @@ fs.readFile('./index.html', function (err, html) {
     });
 });
 
+*/
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(5001);
+app.use( require('express').static(__dirname ));
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/sample.html');
+});
 io.on('connection', function(socket){
   
   socket.on('message', function(data) {
-  	if(data && typeof data.nickname == 'string' && typeof data.message == 'string' && data.nickname && data.message) {
-  		socket.broadcast.emit('message', { nickname: html(data.nickname), message: html(data.message) });
-      console.log(data);
+
+  	if(data &&  typeof data.message == 'string' && data.message) {
+  		socket.broadcast.emit('message', {  message: html(data.message) });
+     
   	}
   })
 
